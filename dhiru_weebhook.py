@@ -89,6 +89,42 @@ def test():
     return "Hello there my friend !!"
 
 
+
+# -------------------- My Test -----------------
+
+@app.route('/dhiru_post',methods=['GET'])
+def dhiru_post():
+    req = request.get_json(silent=True, force=True)
+        
+        res = processDhiruRequest(req)
+            
+            res = json.dumps(res, indent=4)
+                
+                r = make_response(res)
+                    
+                    r.headers['Content-Type'] = 'application/json'
+
+return r
+
+def processDhiruRequest(req):
+ 
+    baseurl = 'https://www.nayaindia.com/api_new/'
+    
+    parameters =   {
+   "api_type":"news_listing",
+    "slug":"life-mantra",
+    "start":0,
+         "length":12
+
+}
+    
+    res =  req.post(url, data=parameters)
+   return res
+
+#-----------------------------------------------------
+
+
+
 @app.route('/webhook_dhiru', methods=['POST'])
 def static_reply():
     speech = "Hello there,  this reply is from the webhook !! "
