@@ -83,7 +83,6 @@ def makeWebhookResult(data,currency2):
 
         "fulfillmentText": speech,
         "source": "Dhiru Web hook API"
-        "fulfillmentMessages":[]
     }
 
 
