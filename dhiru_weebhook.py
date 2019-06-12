@@ -6,10 +6,7 @@ from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
 from urllib.error import HTTPError
 
-# New Import added 
-
 import requests
-#-----------------
 
 import json
 import os
@@ -120,22 +117,3 @@ if __name__ == '__main__':
 
     app.run(debug=True, port=port, host='0.0.0.0')
 
-
-
-
-#        "fulfillmentText": "This is a text response",
-#            "fulfillmentMessages": [
-#                                    {
-#                                    "card": {
-#                                    "title": "card title",
-#                                    "subtitle": "card text",
-#                                    "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-#                                    "buttons": [
-#                                                {
-#                                                "text": "button text",
-#                                                "postback": "https://assistant.google.com/"
-#                                                }
-#                                                ]
-#                                    }
-#                                    }
-#                                    ]
