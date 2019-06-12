@@ -24,35 +24,38 @@ app = Flask(__name__)
 
 @app.route('/dhiru_post',methods=['GET'])
 def dhiru_post():
-    req = request.get_json(silent=True, force=True)
-        
-        res = processDhiruRequest(req)
-            
-            res = json.dumps(res, indent=4)
-                
-                r = make_response(res)
-                    
-                    r.headers['Content-Type'] = 'application/json'
 
-return r
+    url = "https://www.nayaindia.com/api_new/"
 
-def processDhiruRequest(req):
- 
-    baseurl = 'https://www.nayaindia.com/api_new/'
-    
-    parameters =   {
+   parameters =   {
    "api_type":"news_listing",
     "slug":"life-mantra",
     "start":0,
-         "length":12
+         "length":12 }
 
-}
+   header = {"Content-type": "application/json; charset=UTF-8",
+          "Accept": "text/plain"} 
+
+ response_decoded_json = requests.post(url, data=parameters, headers=head)
+ response_json = response_decoded_json.json()
+return response_json
+
+
+# def processDhiruRequest(req):
+ 
+#     baseurl = 'https://www.nayaindia.com/api_new/'
     
-    response = requests.post(
-            baseurl, data=json.dumps(parameters),
-            headers={'Content-Type': 'application/json'}
-        )
-        return response.content
+#     parameters =   {
+#    "api_type":"news_listing",
+#     "slug":"life-mantra",
+#     "start":0,
+#          "length":12 }
+    
+#     response = requests.post(
+#             baseurl, data=json.dumps(parameters),
+#             headers={'Content-Type': 'application/json'}
+#         )
+#         return response.content
 
 #-----------------------------------------------------
 
