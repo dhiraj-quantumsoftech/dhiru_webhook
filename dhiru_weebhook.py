@@ -108,18 +108,24 @@ return r
 
 def processDhiruRequest(req):
  
-    baseurl = 'https://www.nayaindia.com/api_new/'
-    
-    parameters =   {
-   "api_type":"news_listing",
-    "slug":"life-mantra",
-    "start":0,
-         "length":12
+ return {
 
-}
+        "fulfillmentText": speech,
+        "source": "Dhiru Web hook API"
+    }
+
+#     baseurl = 'https://www.nayaindia.com/api_new/'
     
-    res =  req.post(url, data=parameters)
-   return res
+#     parameters =   {
+#    "api_type":"news_listing",
+#     "slug":"life-mantra",
+#     "start":0,
+#          "length":12
+
+# }
+    
+#     res =  req.post(url, data=parameters)
+#    return res
 
 #-----------------------------------------------------
 
