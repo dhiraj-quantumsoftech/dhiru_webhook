@@ -92,13 +92,13 @@ def test():
 @app.route('/webhook_dhiru', methods=['POST'])
 def static_reply():
     speech = "Hello there,  this reply is from the webhook !! "
-    string = "You are awesome !!"
-    Message = "This is Make by dhiraj"
+    string = "Hi There how are you !! Webhook by Dhiraj"
+    Message = "GOOGLE"
 
     my_result = {
 
         "fulfillmentText": string,
-        "source": string
+        "source": Message
     }
 
     res = json.dumps(my_result, indent=4)
