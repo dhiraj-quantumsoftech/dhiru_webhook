@@ -39,10 +39,10 @@ def dhiru_post():
 #     "start":0,
 #          "length":12 }
 
-   header = {"Content-type": "application/json; charset=UTF-8",
-          "Accept": "text/plain"} 
+  # header = {"Content-type": "application/json; charset=UTF-8",
+  #        "Accept": "text/plain"} 
 
- response_decoded_json = requests.post(url, data=payload, headers=head)
+ response_decoded_json = requests.post(url, data=payload)
  response_json = response_decoded_json.json()
 return response_json
 
