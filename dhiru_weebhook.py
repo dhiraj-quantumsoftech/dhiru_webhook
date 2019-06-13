@@ -10,6 +10,7 @@ import requests
 import json
 import os
 
+from flask import jsonify
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -22,18 +23,16 @@ app = Flask(__name__)
 
 @app.route('/dhiru_post', methods=['GET'])
 def dhiru_post():
-    url = "https://www.nayaindia.com/api_new/"
-
-    payload = {"number": 12524,
-               "api_type": "news_listing",
-               "slug": "life-mantra",
-               "start": 0,
-               "end": 10}
-    response_decoded_json = requests.post(url, data=payload)
-    response_json = response_decoded_json.json()
-    print(response_json)
-    return response_json
-
+  url = "https://www.nayaindia.com/api_new/"
+  payload = {
+        "number": 12524,
+        "api_type": "news_listing",
+        "slug": "life-mantra",
+        "start": 0,
+        "end": 10
+    }
+  response = requests.post(url, data=jsonify(payload))
+  return jsonify(response.json())
 
 # def processDhiruRequest(req):
 
