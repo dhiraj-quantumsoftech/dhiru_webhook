@@ -132,7 +132,8 @@ def static_reply():
                                  "text": "button text",
                                  "postback": "https://assistant.google.com/"}
                              ]
-                         }
+                         },
+                        "platform": "FACEBOOK"
                      }
                      ]
                  }
