@@ -122,11 +122,18 @@ def static_reply():
     string = "Hi There how are you !! Webhook by Dhiraj"
     Message = "GOOGLE"
 
-    my_result = {
-
-        "fulfillmentText": string,
-        "source": Message
-    }
+      my_result = {"fulfillmentText":"This is a text response",
+                 "fulfillmentMessages":[{"card":{
+                     "title":"card title","subtitle":"card text",
+                     "imageUri":"https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+                     "buttons":[{
+                         "text":"button text",
+                         "postback":"https://assistant.google.com/"}
+                     ]
+                 }
+                 }
+                 ]
+                 }
 
     res = json.dumps(my_result, indent=4)
     r = make_response(res)
