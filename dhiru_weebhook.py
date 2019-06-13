@@ -1,6 +1,4 @@
-
 from __future__ import print_function
-
 
 from urllib.parse import urlparse, urlencode
 from urllib.request import urlopen, Request
@@ -22,49 +20,37 @@ app = Flask(__name__)
 
 # -------------------- My Test -----------------
 
-@app.route('/dhiru_post',methods=['GET'])
+@app.route('/dhiru_post', methods=['GET'])
 def dhiru_post():
-
     url = "https://www.nayaindia.com/api_new/"
 
-    payload = {"number": 12524, 
-           "api_type": "news_listing", 
-           "slug": "life-mantra",
-              "start":0,
-              "end":10}
-    
-#    parameters =   {
-#    "api_type":"news_listing",
-#     "slug":"life-mantra",
-#     "start":0,
-#          "length":12 }
-
-  # header = {"Content-type": "application/json; charset=UTF-8",
-  #        "Accept": "text/plain"} 
-
- response_decoded_json = requests.post(url, data=payload)
- response_json = response_decoded_json.json()
-return response_json
+    payload = {"number": 12524,
+               "api_type": "news_listing",
+               "slug": "life-mantra",
+               "start": 0,
+               "end": 10}
+    response_decoded_json = requests.post(url, data=payload)
+    response_json = response_decoded_json.json()
+    return response_json
 
 
 # def processDhiruRequest(req):
- 
+
 #     baseurl = 'https://www.nayaindia.com/api_new/'
-    
+
 #     parameters =   {
 #    "api_type":"news_listing",
 #     "slug":"life-mantra",
 #     "start":0,
 #          "length":12 }
-    
+
 #     response = requests.post(
 #             baseurl, data=json.dumps(parameters),
 #             headers={'Content-Type': 'application/json'}
 #         )
 #         return response.content
 
-#-----------------------------------------------------
-
+# -----------------------------------------------------
 
 
 @app.route('/webhook', methods=['POST'])
@@ -77,44 +63,36 @@ def webhook():
 
     r = make_response(res)
 
-
     r.headers['Content-Type'] = 'application/json'
 
     return r
 
 
 def processRequest(req):
-
-#    if req.get("queryResult").get("action") != "rate":
-#        print("Please check your action name in DialogFlow...")
-#        return {}
+    #    if req.get("queryResult").get("action") != "rate":
+    #        print("Please check your action name in DialogFlow...")
+    #        return {}
 
     result = req.get("queryResult")
     parameters = result.get("parameters")
 
-
-    print (parameters['currency-name1'])
+    print(parameters['currency-name1'])
     currency1 = parameters['currency-name']
     currency2 = parameters['currency-name1']
     baseurl = 'https://api.exchangeratesapi.io/latest?base=' + currency1 + '&symbols=' + currency2;
 
-
-
-
     if baseurl is None:
         return {}
 
-    
     result = urlopen(baseurl).read()
     data = json.loads(result)
     # for some the line above gives an error and hence decoding to utf-8 might help
     # data = json.loads(result.decode('utf-8'))
-    res = makeWebhookResult(data,currency2)
+    res = makeWebhookResult(data, currency2)
     return res
 
 
-
-def makeWebhookResult(data,currency2):
+def makeWebhookResult(data, currency2):
     query = data.get('rates')
 
     if query is None:
@@ -124,7 +102,6 @@ def makeWebhookResult(data,currency2):
         return {}
 
     speech = "The exchange rate is  " + str(result)
-
 
     # Naresh
     return {
