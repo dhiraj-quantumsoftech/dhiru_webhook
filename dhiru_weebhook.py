@@ -31,6 +31,7 @@ def dhiru_post():
                "end": 10}
     response_decoded_json = requests.post(url, data=payload)
     response_json = response_decoded_json.json()
+    print(response_json)
     return response_json
 
 
