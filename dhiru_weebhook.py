@@ -31,7 +31,7 @@ def dhiru_post():
         "start": 0,
         "end": 10
     }
-  response = requests.post(url, data=jsonify(payload))
+  response = requests.post(url, data=payload)
   return jsonify(response.json())
 
 # def processDhiruRequest(req):
