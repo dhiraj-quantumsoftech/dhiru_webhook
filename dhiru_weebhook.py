@@ -105,6 +105,7 @@ def makeFulfilmentNewsList(news_arry):
         }
 
         fulfillmentMessages.append(news_dic_main)
+        break
 
     my_result = {"fulfillmentText": "Here is the news i found for you, thanks for using QuantomSoftech AI",
                  "fulfillmentMessages":fulfillmentMessages}
