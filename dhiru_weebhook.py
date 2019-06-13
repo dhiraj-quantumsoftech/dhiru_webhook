@@ -21,18 +21,39 @@ app = Flask(__name__)
 
 # -------------------- My Test -----------------
 
-@app.route('/dhiru_post', methods=['GET'])
+@app.route('/dhiru_post', methods=['POST'])
 def dhiru_post():
-  url = "https://www.nayaindia.com/api_new/"
-  payload = {
-        "number": 12524,
-        "api_type": "news_listing",
-        "slug": "life-mantra",
-        "start": 0,
-        "end": 10
-    }
-  response = requests.post(url, data=payload)
-  return jsonify(response.json())
+    req = request.get_json(silent=True, force=True)
+    url = "https://www.nayaindia.com/api_new"
+    result = req.get("queryResult")
+
+    parameters = result.get("parameters")
+
+    # payload = { "api_type": "news_listing",
+    #     "slug": "life-mantra",
+    #     "start": 0,
+    #     "end": 10
+    # }
+
+    response = requests.post(url, data=json.dumps(parameters))
+
+    response_json = jsonify(response.json())
+
+    response_dic = json.loads(json.dumps(response.json()))
+
+    print(response_dic['message'])
+
+    cardList = []
+
+    news_arry = response_dic['data']['news_list']
+
+    my_result = makeFulfilmentNewsList(news_arry)
+
+    res = json.dumps(my_result, indent=4)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
 
 # def processDhiruRequest(req):
 
@@ -51,6 +72,46 @@ def dhiru_post():
 #         return response.content
 
 # -----------------------------------------------------
+
+
+def makeFulfilmentNewsList(news_arry):
+
+    fulfillmentMessages = []
+
+    for dic in news_arry:
+       # print(dic)
+        attachment_url =  dic['attachment_url']
+        news_slug = dic['news_slug']
+        news_title = dic['news_title']
+        small_summary = dic['small_summary']
+
+        post_url = "https://www.nayaindia.com/"
+
+        card = {
+            "title": news_title,
+            "subtitle": small_summary,
+            "imageUri": attachment_url,
+            "buttons": [{
+                "text": "Read more",
+                "postback": post_url}
+            ]
+        }
+
+        platform = "FACEBOOK"
+
+        news_dic_main = {
+            "card":card,
+            "platform":platform
+        }
+
+        fulfillmentMessages.append(news_dic_main)
+
+    my_result = {"fulfillmentText": "Here is the news i found for you, thanks for using QuantomSoftech AI",
+                 "fulfillmentMessages":fulfillmentMessages}
+    print(my_result)
+
+    return  my_result
+
 
 
 @app.route('/webhook', methods=['POST'])
