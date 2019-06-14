@@ -93,7 +93,12 @@ def makeFulfilmentNewsList(news_arry):
             "imageUri": attachment_url,
             "buttons": [{
                 "text": "Read more",
-                "postback": post_url}
+                "postback": post_url
+            },
+                {
+                "text": "Explore more",
+                "postback": post_url
+            }
             ]
         }
 
