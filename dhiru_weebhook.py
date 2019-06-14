@@ -102,7 +102,7 @@ def makeFulfilmentNewsList(news_arry):
             ]
         }
 
-        platform = "FACEBOOK"
+        #platform = "FACEBOOK"
 
         news_dic_main = {
             "card":card,
