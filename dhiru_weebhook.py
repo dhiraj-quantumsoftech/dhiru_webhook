@@ -105,14 +105,13 @@ def makeFulfilmentNewsList(news_arry):
         #platform = "FACEBOOK"
 
         news_dic_main = {
-            "card":card,
-            "platform":platform
+            "card":card
         }
 
         fulfillmentMessages.append(news_dic_main)
         break
 
-    my_result = {"fulfillmentText": "Here is the news i found for you, thanks for using QuantomSoftech AI",
+    my_result = {"fulfillmentText": "",
                  "fulfillmentMessages":fulfillmentMessages}
     print(my_result)
 
