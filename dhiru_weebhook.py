@@ -146,15 +146,14 @@ def makeFulfilmentNewsList(news_arry):
             ]
         }
 
-        newsDescription = " *"+news_title+"* \n " \
+        newsDescription = " *"+news_title+"*                       \n " \
                                           "" \
                                           "" \
-                                          "" +small_summary+ " " \
+                                          "" +small_summary+ "                    " \
                                                              "" \
-                                                             " " \
-                                                                    "Image:"+attachment_url + " " \
-                                                                                              "" \
-                                                                                              "\n Explore More:"+post_url
+                                                             "" \
+                                                             "" \
+                                                             ""+ "\n Explore More: "+post_url
 
         facebook = "FACEBOOK"
 
@@ -184,7 +183,6 @@ def makeFulfilmentNewsList(news_arry):
     print(my_result)
 
     return  my_result
-
 
 
 @app.route('/webhook', methods=['POST'])
