@@ -74,6 +74,50 @@ def dhiru_post():
 # -----------------------------------------------------
 
 
+# def makeFulfilmentNewsList(news_arry):
+
+#     fulfillmentMessages = []
+
+#     for dic in news_arry:
+#        # print(dic)
+#         attachment_url =  dic['attachment_url']
+#         news_slug = dic['news_slug']
+#         news_title = dic['news_title']
+#         small_summary = dic['small_summary']
+
+#         post_url = "https://www.nayaindia.com/"
+
+#         card = {
+#             "title": news_title,
+#             "subtitle": small_summary,
+#             "imageUri": attachment_url,
+#             "buttons": [{
+#                 "text": "Read more",
+#                 "postback": post_url
+#             },
+#                 {
+#                 "text": "Explore more",
+#                 "postback": post_url
+#             }
+#             ]
+#         }
+
+#         #platform = "FACEBOOK"
+
+#         news_dic_main = {
+#             "card":card
+#         }
+
+#         fulfillmentMessages.append(news_dic_main)
+#         break
+
+#     my_result = {"fulfillmentText": "",
+#                  "fulfillmentMessages":fulfillmentMessages}
+#     print(my_result)
+
+#     return  my_result
+
+
 def makeFulfilmentNewsList(news_arry):
 
     fulfillmentMessages = []
@@ -102,16 +146,40 @@ def makeFulfilmentNewsList(news_arry):
             ]
         }
 
-        #platform = "FACEBOOK"
+        newsDescription = " *"+news_title+"* \n " \
+                                          "" \
+                                          "" \
+                                          "" +small_summary+ " " \
+                                                             "" \
+                                                             " " \
+                                                                    "Image:"+attachment_url + " " \
+                                                                                              "" \
+                                                                                              "\n Explore More:"+post_url
+
+        facebook = "FACEBOOK"
+
+        news_dic_facebook = {
+            "card":card,
+            "platform":facebook
+        }
+
+
+
+        fulfillmentMessages.append(news_dic_facebook)
+
+        skype = "SKYPE"
 
         news_dic_main = {
-            "card":card
+        "card": card,
+        "platform": skype
         }
 
         fulfillmentMessages.append(news_dic_main)
+
+
         break
 
-    my_result = {"fulfillmentText": "",
+    my_result = {"fulfillmentText": newsDescription,
                  "fulfillmentMessages":fulfillmentMessages}
     print(my_result)
 
